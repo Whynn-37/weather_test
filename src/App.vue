@@ -1,28 +1,62 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <main>
+      <WeatherApp :w_data="w_data" />
+    </main>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import WeatherApp from "./components/modules/WeatherApp.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    WeatherApp,
+  },
+  data() {
+    return {
+      w_data: {
+        api_key: "6314c3d9478f582a3d9454809cfc7c44",
+        url_base: "https://api.openweathermap.org/data/2.5/",
+      },
+      query: "",
+      weather: {},
+    };
+  },
+};
 </script>
 
 <style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+main {
+  min-height: 100vh;
+  padding: 25px;
+
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.25),
+    rgba(0, 0, 0, 0.75)
+  );
+}
+
+body {
+  font-family: "montserrat", sans-serif;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background-image: url("./assets/chill-forest.jpg");
+  background-size: cover;
+  background-position: bottom;
+  transition: 0.4s;
+}
+
+#app.warm {
+  background-image: url("./assets/warm-forest.jpg");
 }
 </style>
