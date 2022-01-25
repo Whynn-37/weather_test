@@ -1,7 +1,8 @@
 <template>
-  <div id="app">
+  <div id="app" :class="typeof weatherinfo.main != 'undefined' && weatherinfo.main.temp > 16 ? 'warm' : ''" >
     <main>
-      <WeatherApp :w_data="w_data" />
+      <WeatherApp :w_data="w_data" @change-temp='changeTemp'/>
+     
     </main>
   </div>
 </template>
@@ -21,8 +22,15 @@ export default {
         url_base: "https://api.openweathermap.org/data/2.5/",
       },
       query: "",
-      weather: {},
+      weatherinfo: Object,
     };
+  },
+  methods: {
+    changeTemp(temp) {
+      this.weatherinfo = temp;
+     // console.log(this.weatherinfo)
+   // alert(this.temp)
+    },
   },
 };
 </script>
@@ -58,5 +66,8 @@ body {
 
 #app.warm {
   background-image: url("./assets/warm-forest.jpg");
+}
+#app.cold {
+  background-image: url("./assets/chill-forest.jpg");
 }
 </style>

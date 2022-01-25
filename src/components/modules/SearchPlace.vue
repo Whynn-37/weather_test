@@ -8,8 +8,6 @@
         @keypress="changehWeather"
         v-model="query"
       />
-      <!-- v-model="query"
-        @keypress="fetchWeather" -->
     </div>
   </div>
 </template>
@@ -28,9 +26,10 @@ export default {
   methods: {
     changehWeather(e) {
       if (e.key == "Enter") {
-            // alert(this.query)
+            // alert(this.query)   
       this.$store.dispatch("fetchWeather",[this.w_data,this.query]).then((response) => {
-        console.log(response);
+        console.log(response.data);
+         this.$emit('change-temp', response.data)
       });
       
       }
